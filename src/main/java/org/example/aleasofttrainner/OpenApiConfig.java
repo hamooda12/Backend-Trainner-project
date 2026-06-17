@@ -24,11 +24,11 @@ public class OpenApiConfig {
                 ))
                 .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
                 .info(new Info()
-                        .title("Tourism Hotel Booking System API")
+                        .title("Create Student CRUD")
                         .version("v1")
-                        .description("Modular monolith backend for hotel catalog, availability, booking, payment and notifications.")
+                        .description("Modular monolith backend for Student CRUD")
                         .contact(new Contact()
-                                .name("WatersonFamilyTeam")
+                                .name("HamoodaTeam")
                                 .email("team@example.com")));
     }
 }

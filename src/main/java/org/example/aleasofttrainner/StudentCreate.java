@@ -3,6 +3,8 @@ package org.example.aleasofttrainner;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class StudentCreate {
@@ -23,6 +25,9 @@ public class StudentCreate {
   }
   public void DeleteStudent(String name){
       studentRepositry.deleteStudentByName(name).orElseThrow(()->new StudentNotfound("there is no student with this name"));
+  }
+  public List<StudentDto> getStudents(){
+        return studentRepositry.findAll().stream().map(StdeuntMapper::fromEntity).toList();
   }
 
 }
