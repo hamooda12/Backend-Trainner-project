@@ -1,0 +1,19 @@
+package org.example.aleasofttrainner.Security.Auth;
+
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+import org.example.aleasofttrainner.Security.Role;
+
+@Data
+public class RegisterRequest {
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email must be valid")
+    private String email;
+
+    @NotBlank(message = "Password is required")
+    private String password;
+
+    private Role role = Role.GUEST;
+}
