@@ -1,10 +1,6 @@
 package org.example.aleasofttrainner;
 
-import com.example.hotalproject.HotelCatalog.Utility.Exceptions.*;
-import com.example.hotalproject.HotelCatalog.availability.AvaliabilituyException;
-import com.example.hotalproject.HotelCatalog.booking.BookingException;
-import com.example.hotalproject.HotelCatalog.booking.RoomTypesWithoutBookings;
-import com.example.hotalproject.HotelCatalog.roomType.RoomTypeNotFoundException;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -25,19 +21,16 @@ import java.time.Instant;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({ResourceNotFoundException.class, RoomTypeNotFoundException.class})
+    @ExceptionHandler({     StudentNotfound.class})
     public ResponseEntity<ApiError> handleNotFound(RuntimeException ex, HttpServletRequest request) {
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), request);
     }
 
     @ExceptionHandler({
-            ResourseAlreadyExistException.class,
-            ResourseAlreadyExsitInResourseException.class,
-            ResourseHasNotResourseException.class,
-            ResourseHasResourseException.class,
+
             ConflictException.class,
             SQLIntegrityConstraintViolationException.class,
-            RoomTypesWithoutBookings.class
+
     })
     public ResponseEntity<ApiError> handleConflict(Exception ex, HttpServletRequest request) {
         return buildResponse(HttpStatus.CONFLICT, ex.getMessage(), request);
@@ -53,9 +46,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({
-            BusinessValidationException.class,
-            BookingException.class,
-            AvaliabilituyException.class,
+
             ConstraintViolationException.class,
             MethodArgumentTypeMismatchException.class,
             HttpMessageNotReadableException.class,

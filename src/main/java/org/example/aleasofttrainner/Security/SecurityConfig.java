@@ -45,12 +45,13 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/auth/**",
                                 "/swagger-ui/**",
-                                "/swagger-ui.html",
+
                                 "/api-docs/**"
                         ).permitAll()
                         .requestMatchers(HttpMethod.GET, "/students/**","/actuator/health").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/students/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/students/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/students/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

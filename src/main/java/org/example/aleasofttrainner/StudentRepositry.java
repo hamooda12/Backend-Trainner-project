@@ -8,7 +8,7 @@ import java.util.Optional;
 @Repository
 public interface StudentRepositry extends JpaRepository<Student, Long>{
 
-    Optional<StudentDto> getStudentByName(String name);
+    Optional<Student> getStudentByName(String name);
 
     Optional<StudentDto> deleteStudentByName(String name);
 }

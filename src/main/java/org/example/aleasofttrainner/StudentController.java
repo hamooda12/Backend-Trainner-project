@@ -13,50 +13,72 @@ import java.util.List;
 @RestController
 @RequestMapping("/students")
 public class StudentController {
+
     final StudentCreate studentCreate;
 
     public StudentController(StudentCreate studentCreate) {
         this.studentCreate = studentCreate;
     }
+
     @GetMapping
-    @Operation(summary = "get hotels")
+    @Operation(summary = "Get all students")
     @ApiResponses({
-
-
+            @ApiResponse(responseCode = "200", description = "Students returned"),
             @ApiResponse(responseCode = "401", description = "Unauthorized"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<List<StudentDto>> getAllStudents(){
-        return  ResponseEntity.status(HttpStatus.ACCEPTED).body(studentCreate.getStudents());
- }
+    public ResponseEntity<List<StudentDto>> getAllStudents() {
+        return ResponseEntity.ok(studentCreate.getStudents());
+    }
+
     @PostMapping
-    @Operation(summary = "Create a new hotel")
+    @Operation(summary = "Create a new student")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Hotel created"),
+            @ApiResponse(responseCode = "201", description = "Student created"),
             @ApiResponse(responseCode = "400", description = "Validation error"),
             @ApiResponse(responseCode = "401", description = "Unauthorized"),
             @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<StudentDto> createHotel(@Valid @RequestBody StudentRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(studentCreate.createStudent(request));
+    public ResponseEntity<StudentDto> createStudent(@Valid @RequestBody StudentRequest request) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(studentCreate.createStudent(request));
     }
-    @Operation(summary = "get hotels")
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update student by id")
     @ApiResponses({
-
-
-            @ApiResponse(responseCode = "401", description = "Unauthorized"),
-            @ApiResponse(responseCode = "403", description = "Forbidden"),
-            @ApiResponse(responseCode = "404", description = "NotFound")
+            @ApiResponse(responseCode = "202", description = "Student updated"),
+            @ApiResponse(responseCode = "400", description = "Validation error"),
+            @ApiResponse(responseCode = "404", description = "Student not found")
     })
-    public ResponseEntity<StudentDto> getStudent(@PathVariable String  name) {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(studentCreate.getStudentDto(name));
+    public ResponseEntity<StudentDto> updateStudent(@PathVariable Long id,
+                                                    @Valid @RequestBody StudentRequest request) {
+        return ResponseEntity
+                .status(HttpStatus.ACCEPTED)
+                .body(studentCreate.updateStudent(id, request));
     }
-    public   ResponseEntity<Void> deleteStudent(@PathVariable String  name) {
-        studentCreate.DeleteStudent(name);
-        return  ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Get student by id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Student returned"),
+            @ApiResponse(responseCode = "404", description = "Student not found"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    public ResponseEntity<StudentDto> getStudent(@PathVariable Long id) {
+        return ResponseEntity.ok(studentCreate.getStudentDto(id));
     }
 
-
-
-
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete student by id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Student deleted"),
+            @ApiResponse(responseCode = "404", description = "Student not found")
+    })
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
+        studentCreate.deleteStudent(id);
+        return ResponseEntity.noContent().build();
+    }
 }
