@@ -1,20 +1,48 @@
-name: BuildingAndTestWorkflow.yml
+name: BuildingAndTestWorkflow
+
 on:
   pull_request:
     branches:
       - main
   push:
 
-
+env:
+  PROJECT_TYPE: java
+  JAVA_VERSION: '21'
+  NODE_VERSION: '20'
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: Setup Java Project
-        uses: ./.github/actions/setup-java-project
-      - name: Run Checkstyle
-        run: mvn checkstyle:check
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Lint
+        uses: ./.github/actions/setup-project
+        with:
+          project-type: ${{ env.PROJECT_TYPE }}
+          task: lint
+          java-version: ${{ env.JAVA_VERSION }}
+          node-version: ${{ env.NODE_VERSION }}
+  unit-test:
+    uses: ./.github/workflows/test-reusable.yml
+    with:
+      project-type: java
+      task: unit-test
+      java-version: '21'
+      node-version: '20'
+  integration-test:
+    uses: ./.github/workflows/test-reusable.yml
+    with:
+      project-type: java
+      task: integration-test
+      java-version: '21'
+      node-version: '20'
+  E2E-test:
+    uses: ./.github/workflows/test-reusable.yml
+    with:
+      project-type: java
+      task: e2e-test
+      java-version: '21'
+      node-version: '20'

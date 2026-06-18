@@ -1,13 +1,90 @@
-name: Setup Java Project
-description: Checkout code and setup Java
+name: Setup Project
+description: Setup project environment and run tasks
+
+inputs:
+  project-type:
+    required: true
+    default: java
+
+  task:
+    required: true
+    default: setup
+
+  java-version:
+    required: false
+    default: '21'
+
+  node-version:
+    required: false
+    default: '20'
 
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@v4
-
-    - uses: actions/setup-java@v4
+    # Java setup
+    - name: Setup Java
+      if: ${{ inputs.project-type == 'java' }}
+      uses: actions/setup-java@v4
       with:
-        java-version: '21'
-        distribution: 'temurin'
-        cache: 'maven'
+        java-version: ${{ inputs.java-version }}
+        distribution: temurin
+        cache: maven
+
+    - name: Install Java Dependencies
+      if: ${{ inputs.project-type == 'java' }}
+      run: mvn dependency:go-offline
+      shell: bash
+
+    # React setup
+    - name: Setup Node
+      if: ${{ inputs.project-type == 'react' }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: npm
+
+    - name: Install Node Dependencies
+      if: ${{ inputs.project-type == 'react' }}
+      run: npm ci
+      shell: bash
+    # Java tasks
+    - name: Java Lint
+      if: ${{ inputs.project-type == 'java' && inputs.task == 'lint' }}
+      run: mvn checkstyle:check
+      shell: bash
+
+    - name: Java Unit Test
+      if: ${{ inputs.project-type == 'java' && inputs.task == 'unit-test' }}
+      run: mvn test
+      shell: bash
+
+    - name: Java Integration Test
+      if: ${{ inputs.project-type == 'java' && inputs.task == 'integration-test' }}
+      run: mvn verify
+      shell: bash
+
+    - name: Java E2E Test
+      if: ${{ inputs.project-type == 'java' && inputs.task == 'e2e-test' }}
+      run: mvn verify -Pe2e
+      shell: bash
+
+    - name: Java Build
+      if: ${{ inputs.project-type == 'java' && inputs.task == 'build' }}
+      run: mvn clean package
+      shell: bash
+
+    # React tasks
+    - name: React Lint
+      if: ${{ inputs.project-type == 'react' && inputs.task == 'lint' }}
+      run: npm run lint
+      shell: bash
+
+    - name: React Test
+      if: ${{ inputs.project-type == 'react' && inputs.task == 'test' }}
+      run: npm test
+      shell: bash
+
+    - name: React Build
+      if: ${{ inputs.project-type == 'react' && inputs.task == 'build' }}
+      run: npm run build
+      shell: bash
