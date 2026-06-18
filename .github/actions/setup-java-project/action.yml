@@ -65,7 +65,7 @@ runs:
 
     - name: Java E2E Test
       if: ${{ inputs.project-type == 'java' && inputs.task == 'e2e-test' }}
-      run: mvn verify -Pe2e
+      run: mvn verify -Pe2e -Dspring.profiles.active=test
       shell: bash
 
     - name: Java Build
