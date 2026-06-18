@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run Lint
-        uses: ./.github/actions/setup-project
+        uses: ./.github/actions/setup-java-project
         with:
           project-type: ${{ env.PROJECT_TYPE }}
           task: lint
