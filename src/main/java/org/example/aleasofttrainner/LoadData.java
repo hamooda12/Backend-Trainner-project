@@ -30,7 +30,7 @@ public class LoadData {
                         .role(Role.GUEST)
                         .build());
                 if (true)
-                    System.out.println(appUserRepository.findAll());
+                    System.out.println(appUserRepository.findAll()) ;
             }
         };
     }
