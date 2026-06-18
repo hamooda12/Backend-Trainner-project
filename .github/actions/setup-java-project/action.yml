@@ -67,6 +67,14 @@ runs:
       if: ${{ inputs.project-type == 'java' && inputs.task == 'e2e-test' }}
       run: mvn verify -Pe2e -Dspring.profiles.active=test
       shell: bash
+    - name: Print Failsafe Reports
+      if: always()
+      run: |
+        echo "===== failsafe reports ====="
+        ls -la target/failsafe-reports || true
+        cat target/failsafe-reports/*.txt || true
+        cat target/failsafe-reports/*.xml || true
+      shell: bash
 
     - name: Java Build
       if: ${{ inputs.project-type == 'java' && inputs.task == 'build' }}
