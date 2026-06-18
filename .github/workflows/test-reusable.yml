@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run Test Task
-        uses: ./.github/actions/setup-project
+        uses: ./.github/actions/setup-java-project
         with:
           project-type: ${{ inputs.project-type }}
           task: ${{ inputs.task }}
