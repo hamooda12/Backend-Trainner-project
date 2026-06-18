@@ -8,17 +8,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.math.BigDecimal;
-import java.util.Random;
-
 @Configuration
-public class loadData {
+public class LoadData {
+
     @Bean
     CommandLineRunner seedData(
-                               AppUserRepository appUserRepository,
-                               PasswordEncoder passwordEncoder) {
+            AppUserRepository appUserRepository,
+            PasswordEncoder passwordEncoder
+    ) {
         return args -> {
-
             if (appUserRepository.count() == 0) {
                 appUserRepository.save(AppUser.builder()
                         .email("admin@hotel.local")
@@ -31,10 +29,7 @@ public class loadData {
                         .password(passwordEncoder.encode("Guest@123"))
                         .role(Role.GUEST)
                         .build());
-
             }
-
-
-        }
-;
-    }}
+        };
+    }
+}

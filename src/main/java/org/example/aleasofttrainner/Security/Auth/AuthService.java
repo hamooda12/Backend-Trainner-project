@@ -62,7 +62,7 @@ public class AuthService {
     }
 
     @Transactional
-    public refrechResponse refresh(RefreshTokenRequest request) {
+    public RefreshResponse refresh(RefreshTokenRequest request) {
         RefreshToken rotatedToken = refreshTokenService.verifyAndRotate(request.getRefreshToken());
         return buildrefrechResponse(rotatedToken.getUser(), rotatedToken.getToken());
     }
@@ -83,8 +83,8 @@ public class AuthService {
                 .build();
     }
 
-    private refrechResponse buildrefrechResponse(AppUser user, String refreshToken) {
-        return refrechResponse.builder()
+    private RefreshResponse buildrefrechResponse(AppUser user, String refreshToken) {
+        return RefreshResponse.builder()
                 .accessToken(jwtService.generateToken(user))
                 .refreshToken(refreshToken)
                 .tokenType("Bearer")

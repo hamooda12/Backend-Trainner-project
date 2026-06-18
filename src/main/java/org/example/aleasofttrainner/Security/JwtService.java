@@ -47,7 +47,7 @@ public class JwtService {
     public long getAccessTokenExpirationMs() {
         return jwtExpirationMs;
     }
-public long getRefreshTokenExpirationMs() {
+    public long getRefreshTokenExpirationMs() {
         return jwtExpirationRefreshMs;
     }
     public boolean isTokenValid(String token, UserDetails userDetails) {

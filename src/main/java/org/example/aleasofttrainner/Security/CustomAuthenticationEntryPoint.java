@@ -20,7 +20,8 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+                         AuthenticationException authException)
             throws IOException, ServletException {
         ApiError body = new ApiError(
                 Instant.now().toString(),

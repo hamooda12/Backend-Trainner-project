@@ -6,9 +6,9 @@ import org.example.aleasofttrainner.Security.Role;
 
 @Data
 @Builder
-public class refrechResponse {
+public class RefreshResponse {
     private String accessToken;
-private String refreshToken;
+    private String refreshToken;
     private String tokenType;
     private long expiresIn;
     private String email;
