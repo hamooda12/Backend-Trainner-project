@@ -29,6 +29,8 @@ public class LoadData {
                         .password(passwordEncoder.encode("Guest@123"))
                         .role(Role.GUEST)
                         .build());
+                if (true)
+                    System.out.println(appUserRepository.findAll());
             }
         };
     }
