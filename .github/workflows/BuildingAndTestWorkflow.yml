@@ -12,9 +12,8 @@ env:
   NODE_VERSION: '20'
 
 jobs:
-  tests:
+  lint:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -25,25 +24,27 @@ jobs:
           task: lint
           java-version: ${{ env.JAVA_VERSION }}
           node-version: ${{ env.NODE_VERSION }}
-      - name: unit-test
 
-        uses: ./.github/workflows/test-reusable.yml
-        with:
-         project-type: java
-         task: unit-test
-         java-version: '21'
-         node-version: '20'
-      - name: integration-test
-        uses: ./.github/workflows/test-reusable.yml
-        with:
-          project-type: java
-          task: integration-test
-          java-version: '21'
-          node-version: '20'
-      - name: E2E-test
-        uses: ./.github/workflows/test-reusable.yml
-        with:
-          project-type: java
-          task: e2e-test
-          java-version: '21'
-          node-version: '20'
+  unit-test:
+    uses: ./.github/workflows/test-reusable.yml
+    with:
+      project-type: java
+      task: unit-test
+      java-version: '21'
+      node-version: '20'
+
+  integration-test:
+    uses: ./.github/workflows/test-reusable.yml
+    with:
+      project-type: java
+      task: integration-test
+      java-version: '21'
+      node-version: '20'
+
+  e2e-test:
+    uses: ./.github/workflows/test-reusable.yml
+    with:
+      project-type: java
+      task: e2e-test
+      java-version: '21'
+      node-version: '20'
