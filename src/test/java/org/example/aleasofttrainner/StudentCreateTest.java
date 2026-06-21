@@ -13,27 +13,23 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class StudentCreateTest {
-
-    @Mock
+@Mock
     StudentRepositry studentRepositry;
-
-    @InjectMocks
+@InjectMocks
     StudentCreate studentCreate;
+@Test
+    void createStudent() {
+    Student student =new Student();
+    student.setId(1L);
+    student.setName("John");
+    student.setCountry("Pakistan");
+    student.setPhone("9720595080386");
 
-    @Test
-    void getStudentDto_shouldReturnStudentDto_whenStudentExists() {
-        Student student = new Student();
-        student.setId(1L);
-        student.setName("Ahmad");
-        student.setEmail("ahmad@test.com");
+    when(studentRepositry.findById(1L)).thenReturn(Optional.of(student));
+    StudentDto result = studentCreate.getStudentDto(1L);
 
-        when(studentRepositry.findById(1L)).thenReturn(Optional.of(student));
-
-        StudentDto result = studentCreate.getStudentDto(1L);
-
-        assertThat(result.getName()).isEqualTo("Ahmad");
-        assertThat(result.getEmail()).isEqualTo("ahmad@test.com");
-
-        verify(studentRepositry).findById(1L);
-    }
+    assertThat(result.getName()).isEqualTo("John");
+    assertThat(result.getPhone()).isEqualTo("9720595080386");
+    verify(studentRepositry).findById(1L);
 }
+    }

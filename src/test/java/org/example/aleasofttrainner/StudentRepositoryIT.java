@@ -20,13 +20,11 @@ class StudentRepositoryIT {
         Student student = new Student();
         student.setName("Ali");
         student.setEmail("ali@test.com");
-
         Student saved = studentRepositry.save(student);
-
         Optional<Student> found = studentRepositry.findById(saved.getId());
-
         assertThat(found).isPresent();
         assertThat(found.get().getName()).isEqualTo("Ali");
-        assertThat(found.get().getEmail()).isEqualTo("ali@test.com");
+        assertThat(found.get().getEmail
+                ()).isEqualTo("ali@test.com");
     }
 }
