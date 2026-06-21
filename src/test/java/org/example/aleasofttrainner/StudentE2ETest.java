@@ -33,9 +33,12 @@ MockMvc mockMvc;
     @Test
     void createStudent_shouldReturnCreatedStudent() throws Exception {
         String requestBody = readJson("json/student-create.json");
-        mockMvc.perform(post("/students").accept(MediaType.APPLICATION_JSON).content(requestBody)).andExpect(
-                status().isCreated()
-        ).andExpect(jsonPath("$.name").value("Omar")).
-                andExpect(jsonPath("$.email").value("omar@test.com"));
-       }
+        mockMvc.perform(post("/students")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.name").value("Omar"))
+                .andExpect(jsonPath("$.email").value("omar@test.com"));
+    }
 }
