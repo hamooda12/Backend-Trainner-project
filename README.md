@@ -92,5 +92,4 @@ MySQL → localhost:3306 (or the mapped port configured in docker-compose.yml)
 
 The backend service depends on the MySQL service, and the frontend service depends on the backend service. Docker Compose ensures the containers are started in the correct order
 
-The backend service depends on the MySQL service, and the frontend service depends on the backend service. Docker Compose ensures the containers are started in the correct order.
 
