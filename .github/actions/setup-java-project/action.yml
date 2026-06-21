@@ -5,7 +5,7 @@ inputs:
   project-type:
     required: true
     default: java
-    description:
+
 
   task:
     required: true
@@ -36,7 +36,7 @@ runs:
       run: mvn dependency:go-offline
       shell: bash
 
-    # React setup
+
     - name: Setup Node
       if: ${{ inputs.project-type == 'react' }}
       uses: actions/setup-node@v4
@@ -48,7 +48,7 @@ runs:
       if: ${{ inputs.project-type == 'react' }}
       run: npm ci
       shell: bash
-    # Java tasks
+
     - name: Java Lint
       if: ${{ inputs.project-type == 'java' && inputs.task == 'lint' }}
       run: mvn checkstyle:check

@@ -7,9 +7,9 @@ on:
   push:
 
 env:
-  PROJECT_TYPE: java
-  JAVA_VERSION: '21'
-  NODE_VERSION: '20'
+  PROJECT_TYPE: ${{ vars.PROJECT_TYPE }}
+  JAVA_VERSION: ${{ vars.PROJECT_VERSION }}
+  NODE_VERSION: ${{ vars.PROJECT_VERSION }}
 
 jobs:
   lint:
