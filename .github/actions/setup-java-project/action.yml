@@ -5,6 +5,7 @@ inputs:
   project-type:
     required: true
     default: java
+    description:
 
   task:
     required: true
