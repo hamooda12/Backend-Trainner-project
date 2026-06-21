@@ -45,10 +45,10 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/auth/**",
                                 "/swagger-ui/**",
-
+                                "/actuator/health",
                                 "/api-docs/**"
                         ).permitAll()
-                        .requestMatchers(HttpMethod.GET, "/students/**", "/actuator/health").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/students/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/students/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/students/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/students/**").hasRole("ADMIN")
