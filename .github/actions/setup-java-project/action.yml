@@ -63,14 +63,9 @@ runs:
       run: mvn verify
       shell: bash
 
-    - name: Download Maven Dependencies
-      if: ${{ inputs.project-type == 'java' && inputs.task == 'e2e-test' }}
-      run: mvn dependency:go-offline -Pe2e
-      shell: bash
-
     - name: Java E2E Test
       if: ${{ inputs.project-type == 'java' && inputs.task == 'e2e-test' }}
-      run: mvn clean verify -Pe2e -Dspring.profiles.active=test
+      run: mvn verify -Pe2e -Dspring.profiles.active=test
       shell: bash
 
 
