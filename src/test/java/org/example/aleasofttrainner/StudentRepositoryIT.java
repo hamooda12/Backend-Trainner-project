@@ -18,7 +18,7 @@ class StudentRepositoryIT {
     @Test
     void saveStudent_shouldSaveStudentInDatabase() {
         Student student = new Student();
-
+        student.setName("Ali");
         student.setEmail("ali@test.com");
 
         Student saved = studentRepositry.save(student);

@@ -41,7 +41,7 @@ class StudentE2ETest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.name", is("Omar")))
+                .andExpect(jsonPath("$.name", is("Sami")))
                 .andExpect(jsonPath("$.email", is("omar@test.com")));
     }
 }
