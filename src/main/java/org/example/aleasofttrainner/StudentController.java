@@ -89,4 +89,9 @@ public class StudentController {
         studentCreate.deleteStudent(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/status")
+    public ResponseEntity<String> status() {
+        return ResponseEntity.ok("OK");
+    }
 }
