@@ -47,7 +47,8 @@ public class SecurityConfig {
                                 "/api/auth/**",
                                 "/swagger-ui/**",
                                 "/actuator/health",
-                                "/api-docs/**"
+                                "/api-docs/**",
+                                "/"
                         ).permitAll()
                         .requestMatchers(HttpMethod.GET, "/students/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/students/**").hasRole("ADMIN")

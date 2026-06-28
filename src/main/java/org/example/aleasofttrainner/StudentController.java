@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import java.util.List;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/")
 public class StudentController {
 
     final StudentCreate studentCreate;
